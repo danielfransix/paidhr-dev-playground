@@ -1,0 +1,15 @@
+{
+    "source_file": "..\\assets\\Fairmoney Paygrade sheet (1).xlsx",
+    "template_file": "..\\assets\\Fairmoney Paygrade_Template_2026-02-18.xlsx",
+    "output_file": "..\\assets\\Fairmoney_Paygrade_Import_Auto.xlsx",
+    "allowance_mapping": {
+        "Basic Annual\n(=N=)": "Basic",
+        "Housing Annual\n(=N=)": "Housing",
+        "Transport Annual\n(=N=)": "Transport",
+        "Meal Annual\n(=N=)": "Meal Allowance",
+        "Utility Annual\n(=N=)": "Utility Allowance",
+        "Dressing Annual\n(=N=)": "Dressing Allowance",
+        "Leave Allowance\nAnnual (=N=)": "Leave",
+        "13th Month Annual\n(=N=)": "13th Month"
+    }
+}
