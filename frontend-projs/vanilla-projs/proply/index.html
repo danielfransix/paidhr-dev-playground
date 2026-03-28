@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Proply.io — Own a Piece of Nigerian Real Estate</title>
+  <meta name="description" content="Proply.io lets you invest in premium Nigerian real estate from as little as ₦10,000. Join the waitlist.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:      #1a6b47;
+      --green-mid:  #22885b;
+      --green-lite: #d4edda;
+      --gold:       #c9a84c;
+      --gold-lite:  #fdf3dc;
+      --dark:       #0e1a14;
+      --charcoal:   #1c2c22;
+      --slate:      #4a5e52;
+      --muted:      #7a9080;
+      --offwhite:   #f7f9f7;
+      --white:      #ffffff;
+      --radius:     14px;
+      --shadow:     0 4px 32px rgba(10,40,20,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 5%;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(26,107,71,0.08);
+    }
+    .logo {
+      font-weight: 800; font-size: 1.4rem;
+      color: var(--green);
+      letter-spacing: -0.5px;
+      text-decoration: none;
+    }
+    .logo span { color: var(--gold); }
+    nav a.nav-cta {
+      background: var(--green); color: var(--white);
+      padding: 10px 22px; border-radius: 50px;
+      font-size: 0.88rem; font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    nav a.nav-cta:hover { background: var(--green-mid); transform: translateY(-1px); }
+
+    /* ─── HERO ────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 55% 45%;
+      background: #0e1a14;
+      position: relative; overflow: hidden;
+    }
+    .hero-left {
+      padding: 140px 6% 80px 7%;
+      display: flex; align-items: center;
+      position: relative; z-index: 2;
+    }
+    /* subtle dot grid on left side only */
+    .hero-left::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none; z-index: 0;
+    }
+    .hero-inner {
+      position: relative; z-index: 2; width: 100%;
+    }
+    /* right image column — full bleed, no padding */
+    .hero-image-col {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-image-col img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      display: block;
+      filter: brightness(0.80) saturate(1.15);
+    }
+    /* left-edge fade so image blends into dark background */
+    .hero-image-col::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to right, #0e1a14 0%, rgba(14,26,20,0.3) 25%, transparent 55%);
+      pointer-events: none;
+    }
+    /* bottom caption bar */
+    .hero-image-caption {
+      position: absolute; bottom: 20px; right: 20px;
+      z-index: 3;
+      background: rgba(14,26,20,0.72);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.10);
+      padding: 7px 14px; border-radius: 50px;
+      font-size: 0.75rem; color: rgba(255,255,255,0.65);
+      letter-spacing: 0.3px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 120px 5% 64px; }
+      .hero-image-col { display: none; }
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.35);
+      color: var(--gold); padding: 6px 16px; border-radius: 50px;
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.5px;
+      text-transform: uppercase; margin-bottom: 28px;
+    }
+    .hero-badge::before { content: '●'; font-size: 0.5rem; }
+    h1 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 900; line-height: 1.08;
+      color: var(--white);
+      letter-spacing: -1.5px;
+      margin-bottom: 24px;
+    }
+    h1 em { font-style: normal; color: var(--gold); }
+    .hero-sub {
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      color: rgba(255,255,255,0.72);
+      max-width: 560px;
+      margin-bottom: 44px;
+      font-weight: 400;
+    }
+    .hero-form {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .hero-form input[type="email"] {
+      flex: 1; min-width: 240px;
+      padding: 16px 22px; border-radius: 50px;
+      border: none; outline: none;
+      font-size: 1rem; font-family: inherit;
+      background: rgba(255,255,255,0.10);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.18);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .hero-form input[type="email"]::placeholder { color: rgba(255,255,255,0.45); }
+    .hero-form input[type="email"]:focus {
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.14);
+    }
+    .btn-primary {
+      background: var(--gold); color: var(--dark);
+      border: none; cursor: pointer;
+      padding: 16px 32px; border-radius: 50px;
+      font-size: 1rem; font-weight: 700;
+      font-family: inherit;
+      transition: transform 0.15s, box-shadow 0.2s;
+      white-space: nowrap;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201,168,76,0.35);
+    }
+    .hero-trust {
+      display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+    }
+    .hero-trust span {
+      font-size: 0.82rem; color: rgba(255,255,255,0.50);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .hero-trust span::before { content: '✓'; color: var(--gold); font-weight: 700; }
+
+    /* ─── STATS ───────────────────────────────────── */
+    .stats {
+      background: var(--offwhite);
+      padding: 64px 5%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0;
+    }
+    .stat-item {
+      text-align: center; padding: 32px 20px;
+      border-right: 1px solid rgba(26,107,71,0.10);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-size: 2.4rem; font-weight: 900;
+      color: var(--green); letter-spacing: -1px;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.85rem; color: var(--slate);
+      margin-top: 6px; font-weight: 500;
+    }
+
+    /* ─── PROBLEM ─────────────────────────────────── */
+    .section {
+      padding: 96px 5%;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .section-tag {
+      display: inline-block;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--green);
+      margin-bottom: 16px;
+    }
+    h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800; letter-spacing: -0.8px;
+      line-height: 1.15; color: var(--dark);
+      margin-bottom: 20px;
+    }
+    h2 em { font-style: normal; color: var(--green); }
+    .lead {
+      font-size: 1.1rem; color: var(--slate);
+      max-width: 560px; margin-bottom: 52px;
+    }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .problem-card {
+      background: var(--offwhite);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      border-left: 4px solid transparent;
+    }
+    .problem-card.red { border-left-color: #d9534f; }
+    .problem-card.green { border-left-color: var(--green); }
+    .problem-card h3 {
+      font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: var(--dark);
+    }
+    .problem-card p { font-size: 0.92rem; color: var(--slate); line-height: 1.6; }
+
+    /* ─── HOW IT WORKS ────────────────────────────── */
+    .how-section {
+      padding: 96px 5%;
+      background: var(--dark);
+    }
+    .how-inner { max-width: 1200px; margin: 0 auto; }
+    .how-section .section-tag { color: var(--gold); }
+    .how-section h2 { color: var(--white); }
+    .how-section .lead { color: rgba(255,255,255,0.60); }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      margin-top: 52px;
+    }
+    .step {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      position: relative;
+      transition: background 0.2s;
+    }
+    .step:hover { background: rgba(255,255,255,0.09); }
+    .step-num {
+      font-size: 2rem; font-weight: 900;
+      color: var(--gold); opacity: 0.35;
+      line-height: 1; margin-bottom: 16px;
+    }
+    .step-icon {
+      font-size: 1.8rem; margin-bottom: 14px;
+    }
+    .step h3 {
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--white); margin-bottom: 10px;
+    }
+    .step p {
+      font-size: 0.88rem; color: rgba(255,255,255,0.55);
+      line-height: 1.65;
+    }
+
+    /* ─── FEATURES ────────────────────────────────── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      border: 1px solid rgba(26,107,71,0.12);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .feature-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-3px);
+    }
+    .feature-icon {
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      background: var(--green-lite);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 18px;
+    }
+    .feature-card h3 {
+      font-size: 1.05rem; font-weight: 700; color: var(--dark);
+      margin-bottom: 10px;
+    }
+    .feature-card p {
+      font-size: 0.9rem; color: var(--slate); line-height: 1.65;
+    }
+
+    /* ─── RETURNS VISUAL ──────────────────────────── */
+    .returns-section {
+      padding: 96px 5%;
+      background: var(--green);
+    }
+    .returns-inner { max-width: 1200px; margin: 0 auto; }
+    .returns-section .section-tag { color: rgba(255,255,255,0.65); }
+    .returns-section h2 { color: var(--white); }
+    .returns-section .lead { color: rgba(255,255,255,0.72); }
+    .returns-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .return-pill {
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: var(--radius);
+      padding: 28px 22px; text-align: center;
+    }
+    .return-pill .big {
+      font-size: 2.2rem; font-weight: 900;
+      color: var(--gold); letter-spacing: -1px; line-height: 1;
+      margin-bottom: 8px;
+    }
+    .return-pill .label {
+      font-size: 0.85rem; color: rgba(255,255,255,0.70); font-weight: 500;
+    }
+
+    /* ─── TRUST ───────────────────────────────────── */
+    .trust-section {
+      padding: 96px 5%;
+      background: var(--offwhite);
+    }
+    .trust-inner { max-width: 1200px; margin: 0 auto; }
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .trust-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      box-shadow: 0 2px 16px rgba(10,40,20,0.06);
+    }
+    .trust-card .icon { font-size: 1.6rem; margin-bottom: 14px; }
+    .trust-card h4 {
+      font-size: 0.98rem; font-weight: 700; color: var(--dark); margin-bottom: 8px;
+    }
+    .trust-card p { font-size: 0.87rem; color: var(--slate); line-height: 1.6; }
+
+    /* ─── WAITLIST CTA ────────────────────────────── */
+    .cta-section {
+      padding: 120px 5%;
+      background: linear-gradient(135deg, #0e1a14, #1a3a24);
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 70% at 50% 100%, rgba(201,168,76,0.10), transparent);
+      pointer-events: none;
+    }
+    .cta-inner { max-width: 640px; margin: 0 auto; position: relative; z-index: 2; }
+    .cta-section h2 { color: var(--white); font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px; }
+    .cta-section p { color: rgba(255,255,255,0.65); font-size: 1.1rem; margin-bottom: 40px; }
+    .cta-form {
+      display: flex; flex-direction: column; gap: 14px; align-items: center;
+    }
+    .cta-form-row {
+      display: flex; gap: 12px; width: 100%; flex-wrap: wrap;
+    }
+    .cta-form input {
+      flex: 1; min-width: 200px;
+      padding: 16px 22px; border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.08);
+      color: white; font-size: 1rem; font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .cta-form input::placeholder { color: rgba(255,255,255,0.40); }
+    .cta-form input:focus { border-color: var(--gold); }
+    .cta-form .btn-primary { width: 100%; max-width: 340px; font-size: 1.05rem; padding: 18px 32px; }
+    .cta-note { font-size: 0.8rem; color: rgba(255,255,255,0.35); margin-top: 8px; }
+
+    /* ─── FOOTER ──────────────────────────────────── */
+    footer {
+      background: var(--dark); color: rgba(255,255,255,0.40);
+      padding: 40px 5%;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+      font-size: 0.82rem;
+    }
+    footer .logo { font-size: 1.1rem; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { color: rgba(255,255,255,0.40); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.80); }
+
+    /* ─── FAQ ─────────────────────────────────────── */
+    .faq-section {
+      padding: 96px 5%;
+      background: var(--offwhite);
+    }
+    .faq-inner { max-width: 800px; margin: 0 auto; }
+    .faq-list { margin-top: 52px; display: flex; flex-direction: column; gap: 12px; }
+    .faq-item {
+      background: var(--white);
+      border: 1px solid rgba(26,107,71,0.10);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .faq-item.open { box-shadow: var(--shadow); border-color: rgba(26,107,71,0.22); }
+    .faq-q {
+      width: 100%; text-align: left;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 22px 28px;
+      background: none; border: none; cursor: pointer;
+      font-family: inherit; font-size: 1rem; font-weight: 600;
+      color: var(--dark); line-height: 1.4;
+    }
+    .faq-q .arrow {
+      flex-shrink: 0;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--green-lite); color: var(--green);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; transition: transform 0.3s;
+    }
+    .faq-item.open .faq-q .arrow { transform: rotate(45deg); background: var(--green); color: white; }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.38s ease, padding 0.3s ease;
+      padding: 0 28px;
+    }
+    .faq-a p {
+      font-size: 0.92rem; color: var(--slate); line-height: 1.75;
+      padding-bottom: 22px;
+    }
+    .faq-item.open .faq-a { max-height: 400px; padding-top: 0; }
+
+    /* ─── SUCCESS STATE ───────────────────────────── */
+    .success-msg {
+      display: none;
+      padding: 16px 24px; border-radius: 12px;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.35);
+      color: var(--gold); font-weight: 600;
+      font-size: 0.95rem; text-align: center;
+      margin-top: 12px;
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 768px) {
+      .problem-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr; }
+      nav a.nav-cta { display: none; }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(26,107,71,0.10); }
+      .stat-item:last-child { border-bottom: none; }
+      .hero-form { flex-direction: column; }
+      .hero-form input[type="email"] { min-width: unset; width: 100%; }
+      .btn-primary { width: 100%; }
+    }
+
+    /* ─── ANIMATIONS ──────────────────────────────── */
+    .fade-up {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Proply<span>.io</span></a>
+  <a href="#waitlist" class="nav-cta">Join the Waitlist</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Left: copy & form -->
+  <div class="hero-left">
+    <div class="hero-inner">
+      <div class="hero-badge">Now Accepting Waitlist</div>
+      <h1>Own Nigerian Real Estate<br>From <em>₦10,000</em></h1>
+      <p class="hero-sub">
+        Proply.io lets everyday Nigerians invest in premium properties across Lagos, Abuja and Port Harcourt — and earn passive rental income — without buying a full property.
+      </p>
+      <form class="hero-form" onsubmit="handleHeroSubmit(event)">
+        <input type="email" id="hero-email" placeholder="Enter your email address" required />
+        <button type="submit" class="btn-primary">Get Early Access →</button>
+      </form>
+      <div class="success-msg" id="hero-success">🎉 You're on the list! We'll be in touch soon.</div>
+      <div class="hero-trust">
+        <span>Exit anytime via marketplace</span>
+        <span>SEC-compliant structure</span>
+        <span>Built on Solana</span>
+        <span>Backed by 15+ years in tech</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: full-bleed Lagos real estate photo -->
+  <div class="hero-image-col">
+    <img
+      src="https://images.unsplash.com/photo-1590073844006-33379778ae09?w=1400&auto=format&fit=crop&q=85"
+      onerror="this.src='https://images.unsplash.com/photo-1577948000111-9c970dfe3743?w=1400&auto=format&fit=crop&q=85'"
+      alt="Lagos Victoria Island skyline and real estate"
+    />
+    <div class="hero-image-caption">📍 Victoria Island, Lagos</div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item fade-up">
+    <div class="stat-num">₦41.2T</div>
+    <div class="stat-label">Nigeria's real estate market value</div>
+  </div>
+  <div class="stat-item fade-up">
+    <div class="stat-num">95%</div>
+    <div class="stat-label">of Nigerians locked out of property investment</div>
+  </div>
+  <div class="stat-item fade-up">
+    <div class="stat-num">15–20%</div>
+    <div class="stat-label">Target annual returns for investors</div>
+  </div>
+  <div class="stat-item fade-up">
+    <div class="stat-num">#2</div>
+    <div class="stat-label">Nigeria's global crypto adoption ranking</div>
+  </div>
+</div>
+
+<!-- PROBLEM & OPPORTUNITY -->
+<div style="padding: 96px 5%; max-width: 1200px; margin: 0 auto;">
+  <div class="fade-up">
+    <span class="section-tag">The Problem</span>
+    <h2>Real estate builds wealth.<br>But <em>95% of Nigerians</em> can't access it.</h2>
+    <p class="lead">The average Lagos apartment costs ₦50 million. Most Nigerians earn under ₦200,000 a month. The math doesn't work — until now.</p>
+  </div>
+  <div class="problem-grid fade-up">
+    <div class="problem-card red">
+      <h3>🚫 The Old Way</h3>
+      <p>Minimum property investments of ₦10M–₦500M. Banks charging 26–32% lending rates. Premium locations accessible only to the top 2–5% of earners. Your wealth stays on the sidelines.</p>
+    </div>
+    <div class="problem-card green">
+      <h3>✅ The Proply Way</h3>
+      <p>Buy fractional tokens from ₦10,000. Earn monthly rental income via smart contracts. Trade your stake on a secondary market anytime. Real estate investing, finally democratized.</p>
+    </div>
+    <div class="problem-card red">
+      <h3>🚫 Developers' Dilemma</h3>
+      <p>Quality developers are forced to take on punishing bank debt at 26–32% to fund projects, squeezing margins and limiting supply of new housing.</p>
+    </div>
+    <div class="problem-card green">
+      <h3>✅ A Better Capital Stack</h3>
+      <p>Proply connects developers directly to 2.3 million crypto-enabled Nigerian investors, enabling faster, cheaper fundraising and more projects coming to market.</p>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="how-inner">
+    <span class="section-tag fade-up">How It Works</span>
+    <h2 class="fade-up" style="color: white;">Invest in 4 simple steps</h2>
+    <p class="lead fade-up">From registration to rental income — the whole process takes minutes, not months.</p>
+    <div class="steps">
+      <div class="step fade-up">
+        <div class="step-num">01</div>
+        <div class="step-icon">📱</div>
+        <h3>Sign Up &amp; Verify</h3>
+        <p>Complete a 2–3 minute KYC process on your phone. No paperwork. No bank visits.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-num">02</div>
+        <div class="step-icon">🏠</div>
+        <h3>Browse Properties</h3>
+        <p>Explore verified, professionally managed properties in Lagos, Abuja, and Port Harcourt — each with full due diligence reports.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-num">03</div>
+        <div class="step-icon">🪙</div>
+        <h3>Buy Your Tokens</h3>
+        <p>Start from ₦10,000. Each token represents a legal fractional ownership stake in the property via a regulated SPV.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-num">04</div>
+        <div class="step-icon">💰</div>
+        <h3>Earn &amp; Exit</h3>
+        <p>Receive monthly rental yields automatically. When you're ready, sell your tokens on our secondary marketplace — full liquidity, on your terms.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<div style="padding: 96px 5%; max-width: 1200px; margin: 0 auto;">
+  <span class="section-tag fade-up">Why Proply</span>
+  <h2 class="fade-up">Built for <em>Nigeria's future</em></h2>
+  <p class="lead fade-up">Everything about Proply.io was designed specifically for the Nigerian market — from technology to regulation to how returns are paid.</p>
+  <div class="features-grid fade-up">
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h3>Solana-Powered Speed</h3>
+      <p>Built on Solana for 65,000 TPS capacity, sub-second settlement, and transaction fees as low as $0.00025 — making ₦10,000 investments economically viable.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🏛️</div>
+      <h3>Fully SEC-Compliant</h3>
+      <p>Structured under Nigeria's Investment and Securities Act (ISA) 2025. Your tokens are regulated securities, not speculative crypto. Your investment is protected.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💵</div>
+      <h3>Monthly Rental Income</h3>
+      <p>Smart contracts automatically distribute your share of rental income every month — no chasing landlords, no middlemen, no delays.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔄</div>
+      <h3>Secondary Marketplace</h3>
+      <p>Unlike traditional real estate, you're not locked in. Trade your property tokens on our marketplace whenever you need liquidity.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🛡️</div>
+      <h3>SPV Asset Protection</h3>
+      <p>Each property is held in an independent Special Purpose Vehicle, ensuring complete legal separation and protecting your investment from platform risk.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Real-Time Analytics</h3>
+      <p>Track your portfolio performance, rental yields, and property valuations with a live dashboard — right from your phone.</p>
+    </div>
+  </div>
+</div>
+
+<!-- RETURNS -->
+<section class="returns-section">
+  <div class="returns-inner">
+    <span class="section-tag fade-up">The Numbers</span>
+    <h2 class="fade-up" style="color: white;">Returns that beat your savings account — significantly.</h2>
+    <p class="lead fade-up">Nigerian real estate has historically delivered strong returns. Proply targets the premium segments where these returns are most consistent.</p>
+    <div class="returns-grid fade-up">
+      <div class="return-pill">
+        <div class="big">15–20%</div>
+        <div class="label">Target annual returns</div>
+      </div>
+      <div class="return-pill">
+        <div class="big">7.08%</div>
+        <div class="label">Annual market growth rate</div>
+      </div>
+      <div class="return-pill">
+        <div class="big">35%</div>
+        <div class="label">Annual PropTech sector growth</div>
+      </div>
+      <div class="return-pill">
+        <div class="big">Monthly</div>
+        <div class="label">Rental income distribution</div>
+      </div>
+    </div>
+    <p style="color: rgba(255,255,255,0.40); font-size: 0.78rem; margin-top: 32px;">* Projections are based on historical market data and are not a guarantee of future returns. All investments carry risk.</p>
+  </div>
+</section>
+
+<!-- TRUST & COMPLIANCE -->
+<section class="trust-section">
+  <div class="trust-inner">
+    <span class="section-tag fade-up">Security &amp; Trust</span>
+    <h2 class="fade-up">Your investment is<br><em>protected at every layer.</em></h2>
+    <p class="lead fade-up">We've built the compliance and protection infrastructure you'd expect from a licensed financial institution.</p>
+    <div class="trust-grid fade-up">
+      <div class="trust-card">
+        <div class="icon">🏦</div>
+        <h4>SEC-Licensed Framework</h4>
+        <p>Operating under Nigeria's Digital Asset Service Provider (DASP) framework with proactive SEC engagement through the ARIP sandbox.</p>
+      </div>
+      <div class="trust-card">
+        <div class="icon">🔍</div>
+        <h4>Independent Valuations</h4>
+        <p>Quarterly property valuations by NIESV-certified estate surveyors, ensuring you always know what your investment is worth.</p>
+      </div>
+      <div class="trust-card">
+        <div class="icon">🔒</div>
+        <h4>Smart Contract Audits</h4>
+        <p>All smart contracts undergo multiple independent security audits before any investor funds are deployed.</p>
+      </div>
+      <div class="trust-card">
+        <div class="icon">📋</div>
+        <h4>Full KYC/AML Compliance</h4>
+        <p>Meeting CBN and SEC requirements with automated compliance systems — protecting both you and the platform.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <span class="section-tag fade-up">FAQ</span>
+    <h2 class="fade-up" style="text-align:center;">Questions we know<br>you're <em>already asking</em></h2>
+
+    <div class="faq-list fade-up">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">
+          What exactly is fractional real estate?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Instead of buying a whole property — which costs tens of millions of naira — you buy a small "fraction" of it represented as a digital token. You legally own a share of the property, just like a shareholder owns part of a company. You earn a proportional share of the rental income and benefit from any rise in the property's value.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">
+          How much do I need to start investing?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <p>You can start from as little as ₦10,000. There is no upper limit — you can invest as much as you like across multiple properties. We designed the minimum specifically so that everyday Nigerians, not just the wealthy, can participate in real estate wealth building.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">
+          Is this legal and regulated in Nigeria?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Yes. Proply.io is structured under Nigeria's Investment and Securities Act (ISA) 2025, which provides a comprehensive digital asset regulatory framework. Our tokens are classified as regulated securities under SEC oversight — not speculative crypto. We are also engaging proactively with the SEC through their Accelerated Regulatory Incubation Programme (ARIP). Every property is held in a separate, regulated Special Purpose Vehicle (SPV) to legally protect your investment.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">
+          How and when do I receive my rental income?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Rental income is distributed monthly, automatically, via smart contracts on the Solana blockchain. There are no manual processes, no landlord delays, and no middlemen taking a cut. Your share lands in your wallet based on the proportion of tokens you hold in each property.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">
+          Can I get my money back whenever I want?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Yes. Proply.io includes a secondary marketplace where you can sell your property tokens to other investors at any time — giving you liquidity that traditional real estate simply cannot offer. You are never locked in. The price you sell at will reflect current market demand for the tokens, similar to how shares trade on a stock exchange.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">
+          What happens if the property loses value or a tenant stops paying rent?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <p>All properties listed on Proply undergo rigorous due diligence, including independent valuations by NIESV-certified surveyors, title verification, and insurance coverage against property damage and title disputes. Each property is held in a separate SPV, so issues with one property do not affect others. We also maintain reserve funds as a buffer against short-term income disruptions. As with all investments, returns are not guaranteed and property values can go down as well as up.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">
+          Is this crypto? Do I need to understand blockchain to use Proply?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <p>No blockchain knowledge required. While Proply.io is built on the Solana blockchain for speed, security, and low transaction costs, your experience is simply that of a mobile-first investing app. You sign up, browse properties, invest, and track your returns — all through a clean, intuitive interface. We handle the technical infrastructure behind the scenes.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">
+          Which properties will be available at launch?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <p>We're launching with three premium residential properties in Lagos — focused on high-yield areas including Victoria Island, Ikoyi, and Lekki. These are professionally managed assets with strong rental demand and solid historical appreciation. Waitlist members will get first access to these launch properties before the platform opens to the public.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFAQ(this)">
+          Can Nigerians in the diaspora invest?
+          <span class="arrow">+</span>
+        </button>
+        <div class="faq-a">
+          <p>Absolutely — this is one of the most exciting use cases for Proply. With 17 million Nigerians abroad, many want exposure to Nigeria's growing property market without the complexity of managing assets remotely. Proply makes diaspora real estate investment as simple as using a mobile app, with income paid directly to your wallet.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST CTA -->
+<section class="cta-section" id="waitlist">
+  <div class="cta-inner">
+    <span class="section-tag" style="color: var(--gold); margin-bottom: 16px; display: block;">Limited Early Access</span>
+    <h2>Be First to<br>Build Wealth with Proply</h2>
+    <p>We're launching in Lagos first. Join the waitlist to get early access, priority onboarding, and exclusive launch benefits.</p>
+    <form class="cta-form" onsubmit="handleCTASubmit(event)">
+      <div class="cta-form-row">
+        <input type="text" placeholder="Your full name" required />
+        <input type="email" id="cta-email" placeholder="Your email address" required />
+      </div>
+      <button type="submit" class="btn-primary">Secure My Spot on the Waitlist →</button>
+      <div class="success-msg" id="cta-success" style="display:none;">🎉 You're in! Welcome to the Proply community. We'll reach out soon.</div>
+    </form>
+    <p class="cta-note">No spam. No commitment. Just first access when we launch.</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="logo">Proply<span>.io</span></a>
+  <div>Democratizing Nigerian Real Estate · Lagos, Nigeria</div>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="mailto:hello@proply.io">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // ── Scroll-triggered fade-up ──────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ── Waitlist form handlers ────────────────────────
+  function handleHeroSubmit(e) {
+    e.preventDefault();
+    const email = document.getElementById('hero-email').value;
+    if (email) {
+      document.getElementById('hero-success').style.display = 'block';
+      document.getElementById('hero-email').value = '';
+      // In production: POST to your waitlist endpoint here
+    }
+  }
+
+  // ── FAQ accordion ─────────────────────────────────
+  function toggleFAQ(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    // close all
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    // open clicked (unless it was already open)
+    if (!isOpen) item.classList.add('open');
+  }
+
+  function handleCTASubmit(e) {
+    e.preventDefault();
+    const success = document.getElementById('cta-success');
+    success.style.display = 'block';
+    e.target.querySelector('button').style.display = 'none';
+    // In production: POST to your waitlist endpoint here
+  }
+</script>
+
+</body>
+</html>
