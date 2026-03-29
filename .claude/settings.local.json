@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \":*)",
+      "Bash(npm install:*)",
+      "Read(//c/Users/daniel-frnsx/.claude/**)",
+      "Bash(claude mcp:*)",
+      "mcp__figma-developer-mcp__get_figma_data",
+      "Bash(cat C:/Users/daniel-frnsx/.claude/ide/*.json)",
+      "Read(//c/Users/daniel-frnsx/AppData/Roaming/Code/User/**)",
+      "Read(//c/Users/daniel-frnsx/AppData/Roaming/**)",
+      "Read(//c/Users/daniel-frnsx/AppData/Local/**)",
+      "Bash(node -e \"const d=require\\(''''fs''''\\).readFileSync\\(''''/dev/stdin'''',''''utf8''''\\); const j=JSON.parse\\(d\\); const keys=Object.keys\\(j\\).filter\\(k=>k.toLowerCase\\(\\).includes\\(''''mcp''''\\)||k.toLowerCase\\(\\).includes\\(''''claude''''\\)||k.toLowerCase\\(\\).includes\\(''''anthropic''''\\)\\); keys.forEach\\(k=>console.log\\(k,''''='''',JSON.stringify\\(j[k]\\).substring\\(0,200\\)\\)\\);\")",
+      "Bash(ls C:/Users/daniel-frnsx/AppData/Local/claude-cli-nodejs/*)",
+      "Read(//c/Users/daniel-frnsx/**)",
+      "mcp__qrono-figma-bridge__figma_ping",
+      "mcp__qrono-figma-bridge__figma_get_nodes_flat",
+      "mcp__qrono-figma-bridge__figma_bulk_set_characters",
+      "mcp__qrono-figma-bridge__figma_set_characters",
+      "mcp__qrono-figma-bridge__figma_get_selection",
+      "Bash(node figma.js ping)",
+      "Bash(node figma.js set_characters '{\"\"nodeId\"\":\"\"488:513\"\",\"\"text\"\":\"\"Log in to your account\"\"}')",
+      "Bash(node figma.js set_characters '{\"\"nodeId\"\":\"\"488:622\"\",\"\"text\"\":\"\"Log in with fingerprint\"\"}')",
+      "Bash(node figma.js set_characters '{\"\"nodeId\"\":\"\"I488:610;611:5279\"\",\"\"text\"\":\"\"Log in\"\"}')",
+      "Bash(node figma.js set_characters '{\"\"nodeId\"\":\"\"I633:1327;633:1519\"\",\"\"text\"\":\"\"Forgot password?\"\"}')",
+      "Bash(node figma.js set_characters '{\"\"nodeId\"\":\"\"I633:1369;633:1519\"\",\"\"text\"\":\"\"Forgot password?\"\"}')",
+      "Bash(node figma.js get_nodes_flat '{\"\"\"\"nodeId\"\"\"\":\"\"\"\"633:2767\"\"\"\",\"\"\"\"skipInstanceChildren\"\"\"\":false}')",
+      "Bash(node -e \"const d=require\\(''''fs''''\\).readFileSync\\(''''/dev/stdin'''',''''utf8''''\\); JSON.parse\\(d\\).filter\\(n=>n.type===''''TEXT''''\\).forEach\\(n=>console.log\\(JSON.stringify\\({id:n.id,text:n.text}\\)\\)\\)\")",
+      "Bash(ls \"c:/Github Repos/paidhr-dev-playground/figma-bridge/\"*.json)",
+      "Bash(ls \"c:/Github Repos/paidhr-dev-playground/figma-bridge/_\"*.json)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\daniel-frnsx\\.claude",
+      "C:\\Users\\daniel-frnsx\\AppData\\Roaming\\Trae\\User",
+      "c:\\Github Repos\\paidhr-dev-playground"
+    ]
+  }
+}

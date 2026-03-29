@@ -1,0 +1,54 @@
+# screen documentation instructions
+
+## Purpose
+
+This doc guides how screens from the PaidHR Time & Attendance module are documented for developers. The goal is to communicate the **designer's intent** — where a screen sits in the user flow, what it's trying to accomplish, and the rules and context that shape the experience — so developers can build the right thing without being handed a UI spec.
+
+Documentation should answer: *What is this screen for? How does it connect to the flow? What does the developer need to be aware of?*
+
+---
+
+## Response Format
+
+```
+## Screen: [Screen Name]
+**From:** [Flow doc section + citation]
+
+### Purpose
+[1–2 sentences. What is this screen trying to accomplish for the user, and where does it sit in the flow?]
+
+### Dev Notes
+[Single paragraph. Communicate what developers need to be aware of — constraints, dependencies, data flows, validation rules, state logic, edge cases. Do not describe layout or UI components. Write as flowing text, not bullets.]
+
+### Discrepancies to Discuss
+[List any mismatches between the screen and the flow docs. Wait for confirmation before editing any docs.]
+```
+
+---
+
+## Writing Guidelines
+
+**Purpose section** — State what the screen accomplishes and how it fits into the larger flow. One or two sentences. Think of it as the "Goal" field from the flow doc writing standards.
+
+**Dev Notes** — This is the substance. Write in paragraphs, not bullets. Cover what the developer needs to *know*, not what they need to *do*. Constraints, dependencies, validation logic, state transitions, edge cases, and relationships to other screens all belong here. Avoid UI language — no component names, no layout descriptions, no copy.
+
+**Tone and length** — Be assertive. No hedging words like "likely," "maybe," or "probably." If something is unclear, ask before writing. Keep notes long enough to be clear, short enough to stay useful.
+
+---
+
+## Process
+
+1. User sends a screen
+2. Load the relevant flow doc and review the section
+3. If anything in the screen is unclear, ask before writing — don't guess
+4. Write the response in the format above
+5. List discrepancies under "Discrepancies to Discuss"
+6. Wait for confirmation before editing any docs
+7. Update docs only after confirmation, aligning with what's in the UI unless instructed otherwise
+8. Confirm "Ready for next screen!"
+
+---
+
+## Flow Doc References
+
+[time attendance flow docs phr-tna](https://www.notion.so/time-attendance-flow-docs-phr-tna-32c964279f8d81a8a19ae78e1a168fdd?pvs=21)

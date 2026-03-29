@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+      font-size: 11px;
+      background: #1e1e1e;
+      color: #ccc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 90px;
+      gap: 6px;
+    }
+    .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #555;
+      display: inline-block;
+      margin-right: 6px;
+      transition: background 0.3s;
+    }
+    .dot.connected { background: #4caf50; }
+    .dot.connecting { background: #ff9800; animation: pulse 1s infinite; }
+    .dot.error { background: #f44336; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .status { display: flex; align-items: center; font-weight: 500; }
+    .sub { font-size: 10px; color: #666; }
+  </style>
+</head>
+<body>
+  <div class="status">
+    <span class="dot connecting" id="dot"></span>
+    <span id="label">Connecting…</span>
+  </div>
+  <div class="sub" id="sub">ws://localhost:9001</div>
+
+  <script>
+    const BRIDGE_URL = 'ws://localhost:9001';
+    const dot = document.getElementById('dot');
+    const label = document.getElementById('label');
+    const sub = document.getElementById('sub');
+
+    let ws = null;
+    let retryTimer = null;
+
+    function setState(state, text, detail) {
+      dot.className = 'dot ' + state;
+      label.textContent = text;
+      if (detail !== undefined) sub.textContent = detail;
+    }
+
+    function connect() {
+      if (ws) { try { ws.close(); } catch(_) {} }
+      setState('connecting', 'Connecting…', 'ws://localhost:9001');
+
+      ws = new WebSocket(BRIDGE_URL);
+
+      ws.onopen = () => {
+        ws.send(JSON.stringify({ type: 'register', role: 'plugin' }));
+      };
+
+      ws.onmessage = (event) => {
+        let msg;
+        try { msg = JSON.parse(event.data); } catch { return; }
+
+        if (msg.type === 'registered') {
+          setState('connected', 'Connected', 'Claude Code is linked');
+          return;
+        }
+
+        // Forward command to main thread
+        parent.postMessage({ pluginMessage: msg }, '*');
+      };
+
+      ws.onerror = () => {
+        setState('error', 'Bridge not running', 'Start bridge-server first');
+      };
+
+      ws.onclose = () => {
+        if (dot.className.includes('connected')) {
+          setState('connecting', 'Reconnecting…', 'ws://localhost:9001');
+        }
+        clearTimeout(retryTimer);
+        retryTimer = setTimeout(connect, 2500);
+      };
+    }
+
+    // Result from main thread → WebSocket → bridge server → client
+    window.onmessage = (event) => {
+      const msg = event.data && event.data.pluginMessage;
+      if (!msg) return;
+      if (ws && ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify(msg));
+      }
+    };
+
+    connect();
+  </script>
+</body>
+</html>
