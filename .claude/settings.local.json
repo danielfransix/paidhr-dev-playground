@@ -27,7 +27,9 @@
       "Bash(node figma.js get_nodes_flat '{\"\"\"\"nodeId\"\"\"\":\"\"\"\"633:2767\"\"\"\",\"\"\"\"skipInstanceChildren\"\"\"\":false}')",
       "Bash(node -e \"const d=require\\(''''fs''''\\).readFileSync\\(''''/dev/stdin'''',''''utf8''''\\); JSON.parse\\(d\\).filter\\(n=>n.type===''''TEXT''''\\).forEach\\(n=>console.log\\(JSON.stringify\\({id:n.id,text:n.text}\\)\\)\\)\")",
       "Bash(ls \"c:/Github Repos/paidhr-dev-playground/figma-bridge/\"*.json)",
-      "Bash(ls \"c:/Github Repos/paidhr-dev-playground/figma-bridge/_\"*.json)"
+      "Bash(ls \"c:/Github Repos/paidhr-dev-playground/figma-bridge/_\"*.json)",
+      "Read(//c//**)",
+      "Bash(cmd /c \"rename \"\"c:\\\\Github Repos\\\\paidhr-dev-playground\\\\figma-bridge\"\" \"\"figlink\"\"\")"
     ],
     "additionalDirectories": [
       "C:\\Users\\daniel-frnsx\\.claude",

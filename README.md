@@ -1,72 +1,73 @@
 # PaidHR Dev Playground
 
-This repository contains the PaidHR Playground Next.js application.
+Welcome to the **PaidHR Dev Playground**! This workspace is a monorepo-style collection of various tools, applications, and experiments created for PaidHR development and prototyping. 
 
-## Getting Started
+## 📂 Workspace Structure
 
-If you have copied this folder, follow these steps to get the project running smoothly.
+The repository is organized into several key directories:
 
-### Prerequisites
+### 1. `frontend-projs/`
+Contains all frontend web applications and prototypes.
+- **`react-nextjs-projs/playground-nextjs`**: A modern Next.js 16 application utilizing the App Router, Turbopack, and Tailwind CSS v4. This is the primary playground for building out complex React features.
+- **`react-nextjs-projs/playground-reactjs`**: A pure React implementation of the Next.js playground, powered by Vite and Tailwind CSS v4. Used for testing identical features in a traditional SPA environment.
+- **`vanilla-projs/proply`**: A vanilla HTML/JS project for quick, dependency-free frontend prototyping.
 
-- **Node.js**: Ensure you have Node.js installed (LTS version recommended, e.g., v18 or v20).
-- **npm**: Comes with Node.js.
+### 2. `csv-import-cleanup-tool/`
+A Python-based utility designed to process, clean, and standardize CSV and Excel data imports (e.g., Fairmoney Paygrade sheets) before they are ingested into the main application.
 
-### Installation
+### 3. `documentation/`
+Contains development notes, architecture guidelines, and other project-related documentation.
+- `dev-notes/`: Guides and specific notes for developers.
 
-1.  **Navigate to the project directory**:
-    The actual application code is located in the `paidhr-playground` subdirectory.
-    ```bash
-    cd paidhr-playground
-    ```
+### 4. `pencil-dev-files/`
+A directory containing design assets, mockups, image exports, and fonts (e.g., TT Commons). *Note: This directory is ignored by Git to keep the repository lightweight.*
 
-2.  **Install dependencies**:
-    This will install Next.js, React, Tailwind CSS v4, and other required packages.
-    ```bash
-    npm install
-    ```
-    *Note: This project uses Tailwind CSS v4. The necessary CLI tools will be installed automatically.*
+---
 
-### Running the Development Server
+## 🚀 Getting Started
 
-To start the local development server:
+Depending on what you want to work on, navigate to the respective directory.
 
+### Frontend Playgrounds (Next.js & React)
+
+Both the Next.js and Vite React playgrounds use modern tooling and Tailwind CSS v4.
+
+#### Next.js Playground
 ```bash
+cd frontend-projs/react-nextjs-projs/playground-nextjs
+npm install
 npm run dev
 ```
+Open [http://localhost:3000](http://localhost:3000) to view the Next.js app.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-### Building for Production
-
-To create an optimized production build:
-
+#### React (Vite) Playground
 ```bash
-npm run build
+cd frontend-projs/react-nextjs-projs/playground-reactjs
+npm install
+npm run dev
+```
+Check the terminal output for the local Vite server URL (usually `http://localhost:5173`).
+
+### CSV Import Cleanup Tool
+
+Make sure you have Python installed.
+```bash
+cd csv-import-cleanup-tool
+# Run the processor script
+python main.py
 ```
 
-To start the production server after building:
+---
 
-```bash
-npm start
-```
+## 🛠️ Technologies Used
 
-### Key Features & Configuration
+- **Frameworks/Libraries**: Next.js 16, React 19, Vite
+- **Styling**: Tailwind CSS v4
+- **Icons**: Phosphor Icons (`@phosphor-icons/react`), Lucide React (`lucide-react`)
+- **Scripting**: Python 3
+- **Design Assets**: Figma/Penpot exports, Custom Fonts
 
-- **Next.js 16**: Uses the App Router and Turbopack.
-- **Tailwind CSS v4**: configured with `@import "tailwindcss";` in `globals.css` and a pure CSS theme configuration.
-- **Icons**: Uses `@phosphor-icons/react` and `lucide-react`.
+## 📝 Notes
 
-### Troubleshooting
-
-- **Tailwind Styles Missing?**
-    Ensure the dev server is running. Tailwind v4 compiles styles on-the-fly.
-    If you need to debug styles specifically, you can run:
-    ```bash
-    npm run tailwind:watch
-    ```
-
-- **Linting Errors?**
-    Run the linter to check for code quality issues:
-    ```bash
-    npm run lint
-    ```
+- **Tailwind CSS v4**: Both React projects utilize the latest Tailwind CSS v4, meaning configuration is largely handled via CSS (`@import "tailwindcss";` and `@theme` directives) rather than a `tailwind.config.js` file.
+- If you encounter missing styles during development, ensure your dev server is running, as Tailwind v4 compiles on-demand.
